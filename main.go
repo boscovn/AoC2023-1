@@ -10,7 +10,6 @@ import (
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	sum := 0
-	keys := []string{"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}
 	wordToNumber := map[string]int{
 		"one":   1,
 		"two":   2,
@@ -36,10 +35,10 @@ func main() {
 				num = int(runes[i] - '0')
 				break
 			}
-			for _, key := range keys {
-				if i-len(key) >= 0 {
-					if string(runes[i-len(key):i+1]) == key {
-						num = wordToNumber[key]
+			for k, v := range wordToNumber {
+				if i-len(k) >= 0 {
+					if string(runes[i-len(k):i+1]) == k {
+						num = v
 						break outerLoop
 					}
 				}
@@ -52,10 +51,10 @@ func main() {
 				num += (int(runes[i]-'0') * 10)
 				break
 			}
-			for _, key := range keys {
-				if (i + len(key)) <= len(runes) {
-					if string(runes[i:i+len(key)]) == key {
-						num += wordToNumber[key] * 10
+			for k, v := range wordToNumber {
+				if (i + len(k)) <= len(runes) {
+					if string(runes[i:i+len(k)]) == k {
+						num += v * 10
 						break otherOuterLoop
 					}
 				}
