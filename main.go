@@ -30,48 +30,42 @@ func main() {
 			break
 		}
 		runes := []rune(text)
+	outerLoop:
 		for i := len(runes) - 1; i >= 0; i-- {
 			char := runes[i]
 			if unicode.IsDigit(char) {
 				num = int(char - '0')
 				break
 			}
-			found := false
 			for _, key := range keys {
 				if i-len(key) >= 0 {
 					if string(runes[i-len(key):i]) == key {
 						num = wordToNumber[key]
-						found = true
-						break
+						break outerLoop
 					}
 				}
 			}
-			if found {
-				break
-			}
 
 		}
+	otherOuterLoop:
 		for i := 0; i < len(runes); i++ {
 			char := runes[i]
 			if unicode.IsDigit(char) {
 				num += (int(char-'0') * 10)
 				break
 			}
-			found := false
 			for _, key := range keys {
 				if (i+len(key))-1 <= len(runes) {
 					if string(runes[i:i+len(key)]) == key {
 						num += wordToNumber[key] * 10
-						found = true
-						break
+						break otherOuterLoop
 					}
 				}
 			}
-			if found {
-				break
-			}
+
 		}
 		sum += num
+		fmt.Println(num)
 
 	}
 
