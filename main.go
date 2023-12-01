@@ -29,7 +29,6 @@ func main() {
 		if text == "" {
 			break
 		}
-		text = text + "y"
 		runes := []rune(text)
 	outerLoop:
 		for i := len(runes) - 1; i >= 0; i-- {
@@ -39,7 +38,7 @@ func main() {
 			}
 			for _, key := range keys {
 				if i-len(key) >= 0 {
-					if string(runes[i-len(key):i]) == key {
+					if string(runes[i-len(key):i+1]) == key {
 						num = wordToNumber[key]
 						break outerLoop
 					}
